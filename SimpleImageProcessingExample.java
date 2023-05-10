@@ -30,16 +30,14 @@ public class SimpleImageProcessingExample {
           int rgb    = inImg.getRGB(x,y);
           // extracting red, green and blue components from rgb integer
           int red    = (rgb >> 16) & 0x000000FF;
-          int green  = (rgb >>  8) & 0x000000FF;
-          int blue   = (rgb      ) & 0x000000FF;
           // computing new color from extracted components
-          int newRgb = ( ( (green << 8) | blue ) << 8 ) | red ; // rotating RGB values
+          int newRgb = (red << 16) | (0 << 8) | 0; // keep only red component
           outImg.setRGB(x,y,newRgb);
       } // EndFor y
     } // EndFor x
 
     // writing out new image
-    File f = new File("TEST_IMAGES/tmp.png");
+    File f = new File("TEST_IMAGES/tmpRed.png");
     ImageIO.write(outImg, "png", f);
     
   } // EndMain
